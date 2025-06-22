@@ -4,22 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Запись на приём | КДН Ардатовского района</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/appointment.css">
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Стили для страницы записи */
+        .appointment-hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.9)), 
+                        url('img/appointment-bg.jpg') no-repeat center/cover;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .appointment-steps {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .step {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            color: #777;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .step.active {
+            color: #1e3c72;
+            border-bottom: 3px solid #1e3c72;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        .specialists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .specialist-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .specialist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #1e3c72;
+        }
+        
+        .specialist-card.selected {
+            background: #f0f7ff;
+            border-color: #1e3c72;
+        }
+        
+        .calendar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calendar-day {
+            padding: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .calendar-day:hover {
+            background: #f0f0f0;
+        }
+        
+        .calendar-day.available {
+            background: #e8f5e9;
+            font-weight: bold;
+        }
+        
+        .calendar-day.selected {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        .time-slots {
+            margin: 2rem 0;
+        }
+        
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .time-slot {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .time-slot:hover {
+            border-color: #1e3c72;
+        }
+        
+        .time-slot.selected {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        button {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #2a5298;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .btn-submit {
+            background: #4CAF50;
+            margin-top: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background: #45a049;
+        }
+        
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .appointment-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .appointment-form input, 
+        .appointment-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .specialists-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-day {
+                padding: 0.3rem;
+            }
+            
+            .logo img {
+                height: 60px;
+                margin-right: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="img/logo.png" alt="Герб Ардатова">
-            <h1>Запись на приём в КДН<br>Ардатовского района</h1>
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.png" alt="Герб Ардатова">
+                <h1>Запись на приём в КДН<br>Ардатовского района</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="appointment.html" class="active">Запись на приём</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="appointment.html" class="active">Запись на приём</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main class="appointment-page">
@@ -49,6 +321,7 @@
                             <p>Иванова А.П.</p>
                             <div class="specialist-info">
                                 <p>Приём по сложным случаям</p>
+                                <p>Вт, Чт 14:00-16:00</p>
                             </div>
                         </div>
                         
@@ -57,6 +330,7 @@
                             <p>Кузнецова Е.А.</p>
                             <div class="specialist-info">
                                 <p>Первичный приём, консультации</p>
+                                <p>Пн-Пт 9:00-12:00</p>
                             </div>
                         </div>
                         
@@ -65,6 +339,7 @@
                             <p>Петров С.И.</p>
                             <div class="specialist-info">
                                 <p>Вопросы профилактики</p>
+                                <p>Ср, Пт 10:00-13:00</p>
                             </div>
                         </div>
                     </div>
@@ -77,17 +352,24 @@
                     <div class="calendar">
                         <div class="calendar-header">
                             <button class="prev-month">←</button>
-                            <h4>Июнь 2024</h4>
+                            <h4 class="month-year">Июнь 2024</h4>
                             <button class="next-month">→</button>
                         </div>
                         <div class="calendar-grid">
-                            <!-- Здесь будет сгенерированный календарь через JS -->
+                            <div class="calendar-day-header">Пн</div>
+                            <div class="calendar-day-header">Вт</div>
+                            <div class="calendar-day-header">Ср</div>
+                            <div class="calendar-day-header">Чт</div>
+                            <div class="calendar-day-header">Пт</div>
+                            <div class="calendar-day-header">Сб</div>
+                            <div class="calendar-day-header">Вс</div>
+                            <!-- Дни будут добавлены через JS -->
                         </div>
                     </div>
                     <div class="time-slots">
                         <h4>Доступное время:</h4>
                         <div class="slots-grid">
-                            <!-- Временные слоты будут добавляться через JS -->
+                            <!-- Временные слоты будут добавлены через JS -->
                         </div>
                     </div>
                     <div class="step-buttons">
@@ -104,7 +386,7 @@
                         <p><strong>Дата:</strong> <span id="summary-date"></span></p>
                         <p><strong>Время:</strong> <span id="summary-time"></span></p>
                     </div>
-                    <form class="appointment-form">
+                    <form class="appointment-form" id="appointmentForm">
                         <input type="text" placeholder="Ваше ФИО" required>
                         <input type="tel" placeholder="Телефон" required>
                         <input type="email" placeholder="Email (необязательно)">
@@ -123,6 +405,248 @@
         </div>
     </footer>
 
-    <script src="js/appointment.js"></script>
+    <script>
+        // Текущие данные записи
+        const appointmentData = {
+            specialist: null,
+            date: null,
+            time: null
+        };
+
+        // Доступные специалисты и их расписание
+        const specialists = {
+            chairman: {
+                name: "Иванова А.П. (Председатель)",
+                availableDays: [2, 4], // Вт, Чт
+                availableTimes: ["14:00", "14:30", "15:00", "15:30"]
+            },
+            secretary: {
+                name: "Кузнецова Е.А. (Секретарь)",
+                availableDays: [1, 2, 3, 4, 5], // Пн-Пт
+                availableTimes: ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30"]
+            },
+            deputy1: {
+                name: "Петров С.И. (Заместитель)",
+                availableDays: [3, 5], // Ср, Пт
+                availableTimes: ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30"]
+            }
+        };
+
+        // Текущая дата
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        // DOM элементы
+        const stepContents = document.querySelectorAll('.step-content');
+        const steps = document.querySelectorAll('.step');
+        const btnNext = document.querySelectorAll('.btn-next');
+        const btnPrev = document.querySelectorAll('.btn-prev');
+        const specialistCards = document.querySelectorAll('.specialist-card');
+        const calendarGrid = document.querySelector('.calendar-grid');
+        const monthYearElement = document.querySelector('.month-year');
+        const prevMonthBtn = document.querySelector('.prev-month');
+        const nextMonthBtn = document.querySelector('.next-month');
+        const slotsGrid = document.querySelector('.slots-grid');
+        const summarySpecialist = document.getElementById('summary-specialist');
+        const summaryDate = document.getElementById('summary-date');
+        const summaryTime = document.getElementById('summary-time');
+        const appointmentForm = document.getElementById('appointmentForm');
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Выбор специалиста
+            specialistCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    specialistCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    appointmentData.specialist = this.dataset.specialist;
+                    document.querySelector('[data-step="1"] .btn-next').disabled = false;
+                    
+                    // Обновляем доступные даты
+                    updateCalendar();
+                });
+            });
+
+            // Навигация по шагам
+            btnNext.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const currentStep = this.closest('.step-content').dataset.step;
+                    goToStep(parseInt(currentStep) + 1);
+                });
+            });
+
+            btnPrev.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const currentStep = this.closest('.step-content').dataset.step;
+                    goToStep(parseInt(currentStep) - 1);
+                });
+            });
+
+            // Навигация по месяцам
+            prevMonthBtn.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            });
+
+            nextMonthBtn.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            });
+
+            // Отправка формы
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Запись успешно оформлена! Мы свяжемся с вами для подтверждения.');
+                // Здесь можно добавить отправку данных на сервер
+            });
+
+            // Инициализация календаря
+            updateCalendar();
+        });
+
+        // Переход между шагами
+        function goToStep(step) {
+            // Скрыть все шаги
+            stepContents.forEach(content => content.classList.remove('active'));
+            steps.forEach(step => step.classList.remove('active'));
+            
+            // Показать текущий шаг
+            document.querySelector(`.step-content[data-step="${step}"]`).classList.add('active');
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            // Обновить данные в шаге подтверждения
+            if (step === 3) {
+                summarySpecialist.textContent = specialists[appointmentData.specialist].name;
+                summaryDate.textContent = appointmentData.date.toLocaleDateString('ru-RU', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                summaryTime.textContent = appointmentData.time;
+            }
+        }
+
+        // Обновление календаря
+        function updateCalendar() {
+            // Установить месяц и год в заголовке
+            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
+                              "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            monthYearElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            // Очистить календарь (оставляем только заголовки дней недели)
+            while (calendarGrid.children.length > 7) {
+                calendarGrid.removeChild(calendarGrid.lastChild);
+            }
+            
+            // Получить первый день месяца и сколько дней в месяце
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Заполнить пустые ячейки для первого дня
+            let startingDay = firstDay === 0 ? 6 : firstDay - 1; // Пн=0, Вс=6
+            for (let i = 0; i < startingDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Заполнить дни месяца
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                const currentDate = new Date(currentYear, currentMonth, day);
+                const dayOfWeek = currentDate.getDay(); // 0=Вс, 1=Пн, ..., 6=Сб
+                
+                // Проверить, доступен ли день для выбранного специалиста
+                if (appointmentData.specialist) {
+                    const specialist = specialists[appointmentData.specialist];
+                    if (specialist.availableDays.includes(dayOfWeek === 0 ? 7 : dayOfWeek)) {
+                        dayElement.classList.add('available');
+                        
+                        // Добавить обработчик клика
+                        dayElement.addEventListener('click', function() {
+                            // Снять выделение с других дней
+                            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                                el.classList.remove('selected');
+                            });
+                            
+                            // Выделить текущий день
+                            this.classList.add('selected');
+                            appointmentData.date = currentDate;
+                            
+                            // Обновить доступное время
+                            updateTimeSlots();
+                            
+                            // Активировать кнопку "Далее"
+                            document.querySelector('[data-step="2"] .btn-next').disabled = false;
+                        });
+                    }
+                }
+                
+                // Выделить текущую дату, если она выбрана
+                if (appointmentData.date && 
+                    currentDate.getDate() === appointmentData.date.getDate() && 
+                    currentDate.getMonth() === appointmentData.date.getMonth() && 
+                    currentDate.getFullYear() === appointmentData.date.getFullYear()) {
+                    dayElement.classList.add('selected');
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Обновить доступное время, если дата уже выбрана
+            if (appointmentData.date) {
+                updateTimeSlots();
+            }
+        }
+
+        // Обновление доступного времени
+        function updateTimeSlots() {
+            slotsGrid.innerHTML = '';
+            
+            if (!appointmentData.specialist || !appointmentData.date) return;
+            
+            const specialist = specialists[appointmentData.specialist];
+            
+            specialist.availableTimes.forEach(time => {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
+                timeSlot.textContent = time;
+                
+                timeSlot.addEventListener('click', function() {
+                    // Снять выделение с других слотов
+                    document.querySelectorAll('.time-slot.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    
+                    // Выделить текущий слот
+                    this.classList.add('selected');
+                    appointmentData.time = time;
+                    
+                    // Активировать кнопку "Далее"
+                    document.querySelector('[data-step="2"] .btn-next').disabled = false;
+                });
+                
+                // Выделить выбранное время
+                if (appointmentData.time === time) {
+                    timeSlot.classList.add('selected');
+                }
+                
+                slotsGrid.appendChild(timeSlot);
+            });
+        }
+    </script>
 </body>
 </html>
