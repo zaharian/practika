@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на приём | КДН Ардатовского района</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/appointment.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Герб Ардатова">
+            <h1>Запись на приём в КДН<br>Ардатовского района</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="appointment.html" class="active">Запись на приём</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="appointment-page">
+        <section class="appointment-hero">
+            <div class="container">
+                <h2>Запись на приём</h2>
+                <p>Выберите специалиста и удобное время</p>
+            </div>
+        </section>
+
+        <section class="appointment-steps">
+            <div class="container">
+                <div class="step active" data-step="1">1. Выбор специалиста</div>
+                <div class="step" data-step="2">2. Выбор даты</div>
+                <div class="step" data-step="3">3. Подтверждение</div>
+            </div>
+        </section>
+
+        <section class="appointment-content">
+            <div class="container">
+                <!-- Шаг 1: Выбор специалиста -->
+                <div class="step-content active" data-step="1">
+                    <h3>К кому вы хотите записаться?</h3>
+                    <div class="specialists-grid">
+                        <div class="specialist-card" data-specialist="chairman">
+                            <h4>Председатель комиссии</h4>
+                            <p>Иванова А.П.</p>
+                            <div class="specialist-info">
+                                <p>Приём по сложным случаям</p>
+                            </div>
+                        </div>
+                        
+                        <div class="specialist-card" data-specialist="secretary">
+                            <h4>Секретарь комиссии</h4>
+                            <p>Кузнецова Е.А.</p>
+                            <div class="specialist-info">
+                                <p>Первичный приём, консультации</p>
+                            </div>
+                        </div>
+                        
+                        <div class="specialist-card" data-specialist="deputy1">
+                            <h4>Заместитель председателя</h4>
+                            <p>Петров С.И.</p>
+                            <div class="specialist-info">
+                                <p>Вопросы профилактики</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-next" disabled>Далее →</button>
+                </div>
+
+                <!-- Шаг 2: Выбор даты -->
+                <div class="step-content" data-step="2">
+                    <h3>Выберите дату и время</h3>
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button class="prev-month">←</button>
+                            <h4>Июнь 2024</h4>
+                            <button class="next-month">→</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <!-- Здесь будет сгенерированный календарь через JS -->
+                        </div>
+                    </div>
+                    <div class="time-slots">
+                        <h4>Доступное время:</h4>
+                        <div class="slots-grid">
+                            <!-- Временные слоты будут добавляться через JS -->
+                        </div>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="btn-prev">← Назад</button>
+                        <button class="btn-next" disabled>Далее →</button>
+                    </div>
+                </div>
+
+                <!-- Шаг 3: Подтверждение -->
+                <div class="step-content" data-step="3">
+                    <h3>Подтвердите запись</h3>
+                    <div class="appointment-summary">
+                        <p><strong>Специалист:</strong> <span id="summary-specialist"></span></p>
+                        <p><strong>Дата:</strong> <span id="summary-date"></span></p>
+                        <p><strong>Время:</strong> <span id="summary-time"></span></p>
+                    </div>
+                    <form class="appointment-form">
+                        <input type="text" placeholder="Ваше ФИО" required>
+                        <input type="tel" placeholder="Телефон" required>
+                        <input type="email" placeholder="Email (необязательно)">
+                        <textarea placeholder="Кратко опишите вопрос"></textarea>
+                        <button type="submit" class="btn-submit">Подтвердить запись</button>
+                    </form>
+                    <button class="btn-prev">← Назад</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Комиссия по делам несовершеннолетних Ардатовского муниципального района</p>
+        </div>
+    </footer>
+
+    <script src="js/appointment.js"></script>
+</body>
+</html>
