@@ -1,0 +1,130 @@
+/* Стили для страницы контактов */
+.contacts-page {
+    background-color: #f5f9ff;
+}
+
+.contacts-hero {
+    background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.9)),
+                url('../img/contacts-bg.jpg') no-repeat center/cover;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.contacts-hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contacts-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.contacts-content {
+    padding: 2rem 0;
+}
+
+.contacts-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contacts-card h3 {
+    color: #1e3c72;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.contacts-card h3 .icon {
+    margin-right: 10px;
+    font-size: 1.3em;
+}
+
+.contact-item {
+    display: flex;
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+
+.contact-type {
+    font-weight: 600;
+    min-width: 120px;
+    color: #555;
+}
+
+.contact-value {
+    flex-grow: 1;
+}
+
+/* Стили для карточек персоналий */
+.leadership .person-card {
+    background: #f8faff;
+    border-left: 4px solid #1e3c72;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.person-badge {
+    display: inline-block;
+    background: #1e3c72;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Стили для членов комиссии */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.member-item {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 3px solid #2a5298;
+}
+
+.member-item h4 {
+    margin-top: 0;
+    color: #1e3c72;
+}
+
+/* Карта */
+.map-container {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .contacts-hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .contact-item {
+        flex-direction: column;
+    }
+
+    .contact-type {
+        margin-bottom: 0.3rem;
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+}
