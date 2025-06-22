@@ -1,0 +1,68 @@
+/* Стили специфичные для страницы "О комиссии" */
+.about-page {
+    background-color: #f9f9f9;
+}
+
+.about-hero {
+    background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.9)),
+                url('../img/about-bg.jpg') no-repeat center/cover;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.about-hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-hero .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.about-content {
+    padding: 2rem 0;
+}
+
+.info-block {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-block h3 {
+    color: #1e3c72;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.info-block h3 .icon {
+    margin-right: 10px;
+    font-size: 1.3em;
+}
+
+.placeholder-text {
+    color: #666;
+    font-style: italic;
+    border-left: 3px solid #1e3c72;
+    padding-left: 15px;
+    margin: 1rem 0;
+}
+
+.placeholder-text em {
+    font-style: normal;
+    color: #333;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .about-hero h2 {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,102 @@
+/* Стили для страницы с графиком работы */
+.schedule-page {
+    background-color: #f5f9ff;
+}
+
+.schedule-hero {
+    background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.9)),
+                url('../img/schedule-bg.jpg') no-repeat center/cover;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.schedule-hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.schedule-content {
+    padding: 2rem 0;
+}
+
+.schedule-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.schedule-card h3 {
+    color: #1e3c72;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.schedule-card h3 .icon {
+    margin-right: 10px;
+    font-size: 1.3em;
+}
+
+.schedule-table {
+    margin: 1.5rem 0;
+}
+
+.schedule-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.day {
+    font-weight: 600;
+    color: #333;
+}
+
+.time {
+    color: #1e3c72;
+    font-weight: bold;
+}
+
+.weekend .day,
+.weekend .time {
+    color: #ff6b6b;
+}
+
+.additional-info ul {
+    padding-left: 1.2rem;
+}
+
+.additional-info li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .schedule-hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .schedule-row {
+        flex-direction: column;
+    }
+
+    .time {
+        margin-top: 0.3rem;
+    }
+}
