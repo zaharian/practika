@@ -1,0 +1,180 @@
+/* Основные стили для страницы записи */
+.appointment-page {
+    background-color: #f5f9ff;
+}
+
+.appointment-hero {
+    background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.9)), 
+                url('../img/appointment-bg.jpg') no-repeat center/cover;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.appointment-steps {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.step {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    color: #777;
+    border-bottom: 3px solid transparent;
+}
+
+.step.active {
+    color: #1e3c72;
+    border-bottom: 3px solid #1e3c72;
+    font-weight: bold;
+}
+
+.specialists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.specialist-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    text-align: center;
+}
+
+.specialist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #1e3c72;
+}
+
+.specialist-card.selected {
+    background: #f0f7ff;
+    border-color: #1e3c72;
+}
+
+.calendar {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.calendar-day {
+    padding: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.calendar-day:hover {
+    background: #f0f0f0;
+}
+
+.calendar-day.available {
+    background: #e8f5e9;
+    font-weight: bold;
+}
+
+.calendar-day.selected {
+    background: #1e3c72;
+    color: white;
+}
+
+.time-slots {
+    margin: 2rem 0;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.time-slot {
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.time-slot:hover {
+    border-color: #1e3c72;
+}
+
+.time-slot.selected {
+    background: #1e3c72;
+    color: white;
+}
+
+.step-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.appointment-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+
+.appointment-form input, 
+.appointment-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-submit {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #45a049;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .specialists-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-day {
+        padding: 0.3rem;
+    }
+}
